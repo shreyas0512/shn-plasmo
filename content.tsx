@@ -39,7 +39,7 @@ function IndexPopup() {
       setDictionary(text)
       return true
     })
-  } )
+  } ,[])
 
   return (
     <div
