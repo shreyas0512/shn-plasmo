@@ -2,7 +2,7 @@ import tldr from "wikipedia-tldr"
 
 chrome.runtime.onInstalled.addListener(function () {
   chrome.contextMenus.create({
-    title: 'Quick Wiki Lookup For "%s"',
+    title: 'Simplify "%s"',
     contexts: ["selection"],
     id: "myContextMenuId"
   })
@@ -29,13 +29,13 @@ export type WikiTldr = {
 
 export type WikiMessage = {
   type: string
-  text: WikiTldr
+  text: string
 }
 
-chrome.contextMenus.onClicked.addListener(async function (info, tab) {
-  const tldrText = await tldr(info.selectionText)
+chrome.contextMenus.onClicked.addListener(function (info, tab) {
+  const dict = info.selectionText
   chrome.tabs.sendMessage(tab.id, {
     type: "lookup",
-    text: tldrText
-  } as WikiMessage)
+    text: dict
+  }as WikiMessage)
 })

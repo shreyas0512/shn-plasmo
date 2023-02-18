@@ -10,32 +10,57 @@ export const getStyle = () => {
 }
 
 function IndexPopup() {
-  const [wikiTldr, setWikiTldr] = useState<WikiTldr>(null)
-
+  const [dictionary, setDictionary] = useState("WORD")
+  const [definition,setDefinition]= useState("definition")
+  const [phonetics,setPhonetics]= useState("phonetics")
+  const [pos,setPos]=useState("partofspeech")
+  useEffect(() => {
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${dictionary}`)
+      .then(response => response.json())
+       .then(data => {
+        // Parse the data and update the state with the definition
+        const firstDefinition = data[0].meanings[0].partOfSpeech;
+        console.log(firstDefinition+"first");
+        setPos(firstDefinition);
+        const def = data[0].meanings[0].definitions[0].definition;
+        const phon= data[0].phonetic;
+        console.log("phon"+phon);
+        console.log(def+"def");
+        setDefinition(def);
+        setPhonetics(phon);
+      console.log(data)})
+      .catch(error => console.log(error));
+  });
   useEffect(() => {
     chrome.runtime.onMessage.addListener(function ({
       type,
       text
     }: WikiMessage) {
-      setWikiTldr(text)
+      setDictionary(text)
       return true
     })
-  }, [])
+  } )
 
   return (
-    <div>
-      <div className="block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-        <h1 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-          Wikipedia TLDR
-        </h1>
-        <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-600 dark:text-white">
-          {wikiTldr && wikiTldr["title"]}
-        </h2>
-        <p className="font-normal text-gray-700 dark:text-gray-400">
-          {wikiTldr && wikiTldr["extract"]}
-        </p>
-      </div>
+    <div
+    className="body1"
+   >
+    <div className="header">
+      
+      <h1>Simplify</h1>
+      <h2>A tool to simplify your space</h2>
     </div>
+    <div className="dict">
+      <h2 className="dictname">{dictionary}</h2>
+      <h2 className="phon">{phonetics}</h2>
+      <h2 className="pos">{pos}</h2>
+      
+      <p>{definition}</p>
+    </div>
+    <div className="dict">
+      <h3>Dictionary</h3>
+    </div>
+</div>
   )
 }
 
