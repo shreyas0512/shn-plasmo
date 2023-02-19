@@ -14,6 +14,11 @@ function IndexPopup() {
   const [definition,setDefinition]= useState("definition")
   const [phonetics,setPhonetics]= useState("phonetics")
   const [pos,setPos]=useState("partofspeech")
+  const [opai,setOpai]=useState("")
+
+
+
+  
   useEffect(() => {
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${dictionary}`)
       .then(response => response.json())
@@ -30,6 +35,7 @@ function IndexPopup() {
         setPhonetics(phon);
       console.log(data)})
       .catch(error => console.log(error));
+  
   });
   useEffect(() => {
     chrome.runtime.onMessage.addListener(function ({
@@ -39,7 +45,13 @@ function IndexPopup() {
       setDictionary(text)
       return true
     })
-  } ,[])
+
+  },[]);
+
+  const OpenAI = require('openai-api');
+const openai = new OpenAI(process.env.OPENAI_API_KEY);
+
+
 
   return (
     <div
@@ -58,7 +70,10 @@ function IndexPopup() {
       <p>{definition}</p>
     </div>
     <div className="dict">
-      <h3>Dictionary</h3>
+      <h3>Queries</h3>
+      <p> {}</p>
+      <h2 className="opai">{opai}</h2>
+
     </div>
 </div>
   )

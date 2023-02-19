@@ -1,13 +1,18 @@
 * {
-  margin-left: 280px;
+
   padding: 0;
   box-sizing: border-box;
   font-family: "inter", sans-serif;
 }
-
+#plasmo-shadow-container{
+  position: absolute;
+  left: 200px;
+  width: 100px;
+}
 .body1{
   
-  
+  position:absolute;
+  left: 640px;
   font-family: "inter", sans-serif;
   border: 2px solid black;
   background-image: url("./assets/bgimg.png");
@@ -90,6 +95,10 @@ h2.pos{
 .dict h3{
   margin-left: 10px;
 
+}
+
+h2.opai{
+  margin-left: 10px;
 }
 
 .dict p{
