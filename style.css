@@ -44,7 +44,7 @@
 
   font-weight: 600;
   margin-left: 10px;
-
+  margin-top: -0.2px;
   letter-spacing: 0.005em;
   font-weight: 600;
   font-size: 25px;
@@ -75,7 +75,7 @@ h2.dictname{
 margin-left: 10px;
 
 margin-top: 0px;
-font-weight: 700;
+font-weight: 800;
 font-style: normal;font-size: 25px;
 line-height: 30px;
 display: flex;
@@ -83,13 +83,17 @@ align-items: center;
 text-align: center;
 }
 h2.phon{
-  margin-top: -20px;
+  margin-top: -17px;
   margin-left: 10px;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 17px;
 
 }
 h2.pos{
-  margin-top: -20px;
+  margin-top: -15px;
   margin-left: 10px;
+  font-weight: 400;
 }
 
 .dict h3{
@@ -98,7 +102,15 @@ h2.pos{
 }
 
 h2.opai{
+  margin-top: -10px;
   margin-left: 10px;
+  font-weight: 300;
+  font-size: 17px;
+  font-style: italic;
+  line-height: 20px;
+  align-items: center;
+  letter-spacing: -0.010em;
+  padding: 2px;
 }
 
 .dict p{
